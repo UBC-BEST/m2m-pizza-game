@@ -1,11 +1,24 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { useEffect, useState } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { GameEngine } from 'react-native-game-engine';
+
 
 export default function App() {
+  const [running, setrunning] = useState(false);
+
+  useEffect(() => {
+    setrunning(true)
+  }, []);
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <GameEngine
+        running={running}
+        style={styles.game_engine}
+      />
+
+      <StatusBar style="auto" hidden={true} />
     </View>
   );
 }
@@ -13,8 +26,12 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+  },
+  game_engine: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
   },
 });
